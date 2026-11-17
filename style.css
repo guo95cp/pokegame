@@ -1,0 +1,407 @@
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-1Thin.ttf') format('truetype');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-2ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-3Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-4Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-5Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-6SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-7Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-8ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('./fonts/Paperlogy-9Black.ttf') format('truetype');
+  font-weight: 900;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #20251d;
+}
+body {
+  background: #3b332b;
+}
+.app {
+  width: min(100%, 540px);
+  min-height: 100svh;
+  margin: auto;
+  background: #d5b99e url("images/background.png") center top/100% 100%
+    no-repeat;
+  padding: 18px 16px 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+header {
+  text-align: center;
+  padding: 3px 0 3px;
+  align-items: space-between;
+}
+.brand {
+  font-weight: 1000;
+  font-size: clamp(25px, 6vw, 35px);
+  letter-spacing: -1.5px;
+  color: #194520;
+}
+.brand img {
+  width: 30%;
+  max-width: 200px;
+}
+.steps {
+  /* display: grid; */
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.step {
+  border: 1px solid #ffffff85;
+  border-radius: 9px;
+  background: #ffffffb0;
+  padding: 10px 3px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.step.active {
+  background: #3ffa31;
+  color: #163619;
+  border-color: #2ca827;
+}
+.tray-section {
+  margin-top: 16px;
+}
+.section-heading {
+  display: Flex ;
+  flex-direction: column;
+  align-items: Center;
+  justify-content: space-between;
+  gap: 0px;
+}
+.section-heading h1 {
+  font-size: 17px;
+  margin: 0 0 8px;
+}
+.section-heading span {
+  font-size: 11px;
+  font-weight: 700;
+}
+/* 가로 스크롤 재료 선택창 */
+.tray-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  width: 100%;
+  height: 250px;
+  gap: 10px;
+  padding: 30px 0 0 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scrollbar-width: none;
+}
+
+.tray-grid::-webkit-scrollbar {
+  display: none;
+}
+.tray-item {
+  flex: 0 0 calc((100% - 50px) / 2);
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+}
+
+/* 재료 이미지 비율 유지 */
+.tray-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100% - 24px);
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* 재료명 */
+.tray-item span {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+
+.tray-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  font-size: 13px;
+  background: #ffffffb0;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.help {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+.bowl-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+.bowl-frame {
+  width: min(100%, 390px);
+  aspect-ratio: 1;
+  touch-action: none;
+  position: relative;
+}
+canvas#pokeCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+}
+.controls button {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  border-radius: 11px;
+  padding: 14px 6px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.primary {
+  background: #3ffa31;
+  color: #173b18;
+}
+.light {
+  background: #ffffffdf;
+  color: #273022;
+}
+.controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.result {
+  position: absolute;
+  inset: 0;
+  background: #eee8dd url("images/background.png") center top/100% 100%
+    no-repeat;
+  min-height: 100%;
+  padding: 25px 18px;
+  text-align: center;
+  z-index: 20;
+}
+.result h2 {
+  margin: 20px 0 5px;
+}
+.result p {
+  font-size: 13px;
+}
+.result canvas {
+  width: min(100%, 380px);
+  display: block;
+  margin: 10px auto;
+  border-radius: 16px;
+}
+.nutrition {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.nutrition div {
+  background: #ffffffe0;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.notice {
+  font-size: 8px !important;
+  line-height: 1.6;
+  color: #ffffff;
+}
+.hidden {
+  display: none !important;
+}
+.dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #0009;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.dialog-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  width: min(100%, 340px);
+  text-align: center;
+}
+.dialog-card h2 {
+  font-size: 18px;
+}
+.dialog-card p {
+  font-size: 13px;
+}
+.drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 60;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 7px 6px #0004);
+}
+/* 4단계 전체 연결 보완 */
+.tray-grid {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+.tray-item {
+  overflow: hidden;
+}
+.tray-item.missing {
+  outline: 1px dashed #b95454;
+}
+.tray-item.missing img {
+  font-size: 9px;
+}
+.result-mode > header,
+.result-mode > .steps,
+.result-mode > .tray-section,
+.result-mode > .bowl-section,
+.result-mode > footer {
+  display: none;
+}
+.result-mode .result {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
+  margin: -18px -16px -24px;
+}
+
+/* 나만의 포케 자랑하기 버튼 */
+.share-poke-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 58px;
+  padding: 16px 20px;
+
+  background: #ffffff;
+  color: #173b18;
+
+  border-radius: 12px;
+  text-decoration: none;
+
+  font-family: "Paperlogy", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 16px;
+}
+
+.share-poke-btn:hover {
+  background: #35e528;
+}
+
+
+@media (max-width: 390px) {
+  .tray-grid {
+    height: 220px;
+    gap: 4px;
+    padding: 5px;
+  }
+  .tray-item {
+    padding: 2px;
+  }
+  .tray-item span {
+    font-size: 10px;
+  }
+  .step {
+    font-size: 10px;
+  }
+}
+
+
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Paperlogy', sans-serif;
+}
